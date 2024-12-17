@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,7 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.hamcrest.core.IsInstanceOf.any;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -43,7 +43,7 @@ class BorrowServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Préparer un livre et un étudiant pour les tests
+        // Prepare a book and a student for tests
         book = Book.builder()
                 .id(1L)
                 .title("Test Book")
@@ -66,10 +66,10 @@ class BorrowServiceTest {
                 .borrowDate(new Date())
                 .build();
 
-        // Configurer les mocks
+        // Configure mocks
         when(borrowDAO.findByStudentIdAndBookIdAndReturnDateIsNull(1L, 1L))
                 .thenReturn(Optional.of(borrow));
-        when(borrowDAO.save(any(Borrow.class))).thenReturn(borrow);
+        when(borrowDAO.save(ArgumentMatchers.any(Borrow.class))).thenReturn(borrow);
 
         // Act
         Borrow returnedBorrow = borrowService.returnBook(1L, 1L);
@@ -79,9 +79,9 @@ class BorrowServiceTest {
         Assertions.assertNotNull(returnedBorrow.getReturnDate());
         assertTrue(returnedBorrow.getBook().getIsAvailable());
 
-        // Vérifier les interactions
+        // Verify interactions
         verify(borrowDAO).findByStudentIdAndBookIdAndReturnDateIsNull(1L, 1L);
-        verify(borrowDAO).save(any(Borrow.class));
+        verify(borrowDAO).save(ArgumentMatchers.any(Borrow.class));
     }
 
     @Test
@@ -115,7 +115,7 @@ class BorrowServiceTest {
         // Arrange
         when(bookDAO.findById(1L)).thenReturn(Optional.of(book));
         when(studentDAO.findById(1L)).thenReturn(Optional.of(student));
-        when(borrowDAO.save(any(Borrow.class))).thenAnswer(invocation -> {
+        when(borrowDAO.save(ArgumentMatchers.any(Borrow.class))).thenAnswer(invocation -> {
             Borrow savedBorrow = invocation.getArgument(0);
             savedBorrow.setId(1L);
             return savedBorrow;
