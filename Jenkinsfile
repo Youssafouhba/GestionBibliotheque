@@ -13,7 +13,7 @@ pipeline {
     environment {
         SONAR_SCANNER_HOME = tool name: 'sonar-scanner'
         SONAR_HOST_URL = 'http://172.17.0.3:9000'
-        SONAR_LOGIN = 'squ_41308bd2e53731e4479f866f565334093819fd3c'
+        SONAR_LOGIN = 'sqa_418217049b9695fab5663978365d0cc82a4ba338'
     }
 
     stages {
