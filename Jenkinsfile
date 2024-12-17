@@ -56,7 +56,7 @@ pipeline {
                    script {
                        withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
                            sh '''
-                               docker build -t gestionbibliotheque:latest -f docker/Dockerfile .
+                               docker build -t gestionbibliotheque:latest -f ./Dockerfile .
                                docker tag gestionbibliotheque:latest youssefdev950/gestionbibliotheque:latest
                                docker push youssefdev950/gestionbibliotheque:latest
                            '''
