@@ -14,13 +14,13 @@ pipeline {
         SONAR_SCANNER_HOME = tool name: 'sonar-scanner'
         SONAR_HOST_URL = 'http://172.17.0.2:9000'
         SONAR_LOGIN = 'squ_41308bd2e53731e4479f866f565334093819fd3c'
-        JAVA_HOME = 'C:/Program Files/Java/jdk-21' // Update path as needed
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
         stage('Checkout') {
             steps {
+                sh 'java -version' // Verify JDK 21 is being used
+                sh 'javac -version'
                 git branch: 'dev',changelog: false ,url: 'https://github.com/Youssafouhba/GestionBibliotheque.git'
             }
         }
