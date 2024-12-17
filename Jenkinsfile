@@ -6,6 +6,10 @@ pipeline {
        git  'Default'
     }
 
+    triggers {
+        // GitHub webhook trigger with ngrok URL
+        githubPush()
+    }
     environment {
         SONAR_SCANNER_HOME = tool name: 'sonar-scanner'
         SONAR_HOST_URL = 'http://172.17.0.2:9000'
