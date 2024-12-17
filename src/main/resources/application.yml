@@ -2,9 +2,18 @@ spring:
   application:
     name: Gestion_Bibliotheque
   datasource:
-    driver-class-name: org.postgresql.Driver
-    password: oooo
-    username: ouhba
-    url: jdbc:postgresql://postgres:5433/gestionbibliotheque
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/clientside}
+    username: ${SPRING_DATASOURCE_USERNAME:clientuserr}
+    password: ${SPRING_DATASOURCE_PASSWORD:AVNS_2s8LBE_oJIbedpG4lSx}
+
+  jpa:
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
 server:
   port: 9090

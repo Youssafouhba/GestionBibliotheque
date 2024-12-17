@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Accueil - Bibliothèque</title>
+</head>
+<body>
+<section>
+    <h1 class="mb-4">Bienvenue à la Bibliothèque</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Livres</h5>
+                    <p class="card-text">Consultez et gérez la collection de livres.</p>
+                    <a th:href="@{/books}" class="btn btn-primary">Voir les Livres</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Étudiants</h5>
+                    <p class="card-text">Gérez les informations des étudiants.</p>
+                    <a th:href="@{/students}" class="btn btn-primary">Voir les Étudiants</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Emprunts</h5>
+                    <p class="card-text">Suivez les emprunts de livres.</p>
+                    <a th:href="@{/borrows}" class="btn btn-primary">Voir les Emprunts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
