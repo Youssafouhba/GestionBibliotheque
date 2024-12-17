@@ -1,0 +1,39 @@
+services:
+  # PostgreSQL service
+  postgres:
+    image: postgres:latest
+    container_name: postgres-local3
+    environment:
+      - POSTGRES_USER=ouhba
+      - POSTGRES_PASSWORD=oooo
+      - POSTGRES_DB=gestionbibliotheque
+    ports:
+      - "5433:5433" # Changed host port to 5433
+    networks:
+      - messaging-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data # Persist data on host machine
+
+  # Your Spring Boot application service
+  springboot-app:
+    build: .
+    container_name: gestion_bibliotheque_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/gestionbibliotheque
+      SPRING_DATASOURCE_USERNAME: ouhba
+      SPRING_DATASOURCE_PASSWORD: oooo
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+    ports:
+      - "9090:9090" # Expose Spring Boot app on port 9000
+    depends_on:
+      - postgres
+    networks:
+      - messaging-network
+
+networks:
+  messaging-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local

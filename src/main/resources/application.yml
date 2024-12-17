@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Gestion_Bibliotheque
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: oooo
+    username: ouhba
+    url: jdbc:postgresql://postgres:5433/gestionbibliotheque
+server:
+  port: 9090
