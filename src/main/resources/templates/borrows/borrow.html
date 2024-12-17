@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::div})}">
+<head>
+    <title>Emprunter un Livre</title>
+</head>
+<body>
+<div>
+    <h1 class="mb-4">Emprunter un Livre</h1>
+
+    <form th:action="@{/borrows/borrow}" method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="studentId" class="form-label">Étudiant</label>
+                <select id="studentId" name="studentId" class="form-select" required>
+                    <option value="">Sélectionner un étudiant</option>
+                    <option th:each="student : ${students}"
+                            th:value="${student.id}"
+                            th:text="${student.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="bookId" class="form-label">Livre</label>
+                <select id="bookId" name="bookId" class="form-select" required>
+                    <option value="">Sélectionner un livre</option>
+                    <option th:each="book : ${books}"
+                            th:value="${book.id}"
+                            th:text="${book.title}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check"></i> Confirmer l'Emprunt
+            </button>
+            <a th:href="@{/borrows}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Annuler
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

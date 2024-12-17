@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::div})}">
+<head>
+    <title>Liste des Étudiants</title>
+</head>
+<body>
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2">Liste des Étudiants</h1>
+        <a th:href="@{/students/add}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Ajouter un Étudiant
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.email}"></td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-sm btn-warning">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <a th:href="@{/students/delete/{id}(id=${student.id})}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

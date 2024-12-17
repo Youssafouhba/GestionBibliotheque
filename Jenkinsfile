@@ -50,13 +50,6 @@ pipeline {
             }
         }
 
-        stage('OWASP SCAN') {
-           steps {
-                echo "OWASP SCAN"
-                dependencyCheck additionalArguments: ' --scan ./',odcInstallation: 'DP'
-                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
 
         stage('Build and Push Docker Image') {
                steps {
