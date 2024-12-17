@@ -54,7 +54,7 @@ pipeline {
         stage('Build and Push Docker Image') {
                steps {
                    script {
-                       withDockerRegistry([credentialsId: 'f9fabc63-3b28-438b-adec-c4928d026fe0', url: 'https://index.docker.io/v1/']) {
+                       withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
                            sh '''
                                docker build -t GestionBibliotheque:latest -f docker/Dockerfile .
                                docker tag GestionBibliotheque:latest youssefdev950/GestionBibliotheque:latest
